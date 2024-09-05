@@ -10,7 +10,6 @@ class Card(models.Model):
     rarity = models.CharField(max_length=25)
     image = models.CharField(max_length=100)
     is_owned = models.BooleanField(default=False)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -20,8 +19,8 @@ class Card(models.Model):
     
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    card_binder = models.ManyToManyField(Card)
-    favorite_cards = models.ManyToManyField(Card)
+    card_binder = models.ManyToManyField(Card, related_name='card_binder')
+    favorite_cards = models.ManyToManyField(Card, related_name='favorite_cards')
 
     def __str__(self):
         return self.user.username

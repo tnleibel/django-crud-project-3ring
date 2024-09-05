@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Results:</h2>
+{% if results %}
+    <ul>
+        {% for card in results %}
+        <li>{{ card.name }}</li>
+        <img src="{{ card.images.small }}"/>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No results found</p>
+{% endif %}
+
+{% endblock %}
