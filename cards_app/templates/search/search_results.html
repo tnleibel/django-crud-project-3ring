@@ -3,12 +3,24 @@
 
 <h2>Results:</h2>
 {% if results %}
-    <ul>
         {% for card in results %}
-        <li>{{ card.name }}</li>
-        <img src="{{ card.images.small }}"/>
+        <div class="card">
+            <img src="{{ card.images.small }}"/>
+            <p>{{ card.name }}</p>
+            {% if user.is_authenticated %}
+            <form method="post" action="{% url 'card-index' %}">
+                {% csrf_token %}
+                <input type="hidden" name="name" value="{{ card.name }}"/>
+                <input type="hidden" name="supertype" value="{{ card.supertype }}"/>
+                <input type="hidden" name="types" value="{{ card.types }}"/>
+                <input type="hidden" name="set" value="{{ card.set.name }}"/>
+                <input type="hidden" name="rarity" value="{{ card.rarity }}"/>
+                <input type="hidden" name="image" value="{{ card.images.large }}"/>
+                <button type="submit">Add to Binder</button>
+            </form>
+            {% endif %}
+        </div>
         {% endfor %}
-    </ul>
 {% else %}
     <p>No results found</p>
 {% endif %}

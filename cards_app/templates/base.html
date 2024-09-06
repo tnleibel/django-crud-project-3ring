@@ -14,11 +14,31 @@
     <header>
         <div class="header-logo-container">
             <h1>3Ring</h1>
+            {% if user.is_authenticated %}
+            <h2>Welcome, {{ user.username }}.</h2>
+            {% endif %}
         </div>
+        <nav>
+            <ul>
+              {% if user.is_authenticated %}
+              <li><a href="{% url 'home' %}">Home</a></li>
+              <li>
+                <form id="logout-form" method="post" action="{% url 'logout' %}">
+                  {% csrf_token %}
+                  <button type="submit">Log out</button>
+                </form>
+              </li>
+              {% else %}
+              <li><a href="{% url 'home' %}">Home</a></li>
+              <li><a href="{% url 'login' %}">Login</a></li>
+              <li><a href="{% url 'signup' %}">Sign Up</a></li>
+              {% endif %}
+            </ul>
+          </nav>
         <div class="search-bar">
             <h1>Search</h1>
             <form method="get" action="{% url 'search' %}">
-                {{ form.as_p }}
+                {{ search_form.as_p }}
                 <button type="submit">Search</button>
             </form>
         </div>

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="page-header">
+    <h1>Sign up</h1>
+</div>
+{% if error_message %}
+    <p>{{ error_message }}</p>
+{% endif %}
+<form action="" method="post" class="form" autocomplete="off">
+    {% csrf_token %}
+    <table>
+        {{ signup_form.as_table }}
+    </table>
+    <button type="submit" class="btn">Submit</button>
+</form>
+{% endblock %}
