@@ -21,7 +21,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     card_binder = models.ManyToManyField(Card, related_name='card_binder')
     favorite_cards = models.ManyToManyField(Card, related_name='favorite_cards')
-
+    
     def __str__(self):
         return self.user.username
 

@@ -21,11 +21,12 @@ def home(request):
 
 @login_required
 def card_index(request):
-    user = request.user
+    
     
     if request.method == 'GET':
-        cards = Card.objects.filter(user=request.user)
-        return render(request, 'cards/index.html', { 'cards': cards })        
+        
+        user = UserProfile.objects.get(user=request.user)
+        return render(request, 'cards/index.html', { 'user': user })        
 
     elif request.method =='POST':
         name = request.POST.get('name')
@@ -46,9 +47,10 @@ def card_index(request):
             )
         card.save()
         
-        binder = UserProfile.card_binder
-        binder.add(card)
-        return redirect('card-index', {'cards': cards})
+        user = UserProfile.user
+        UserProfile.objects.get(user=request.user).card_binder.add(card)
+        
+        return redirect('card-index')
 
 def search(request):
     search_form = forms.SearchForm(request.GET)
@@ -80,6 +82,7 @@ def signup(request):
         if signup_form.is_valid():
             user = signup_form.save()
             login(request, user)
+            UserProfile.objects.create(user=request.user)
             return redirect('home')
         else:
             error_message = 'Invalid sign up, please try again.'

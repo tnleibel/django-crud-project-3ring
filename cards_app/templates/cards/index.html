@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
 <section class="card-container">
-    {% for card in cards %}
+    {% for card in user.card_binder.all %}
         <div class="card">
             <div class="card-content">
                 <div class="card-image-container">
-
+                    <img src="{{ card.image }}"/>
                 </div>
                 <h2>{{ card.name }}</h2>
             </div>
