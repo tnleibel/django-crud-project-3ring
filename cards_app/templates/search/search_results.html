@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
-{% block content %}
 
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/search/search-results.css' %}"/>
+{% endblock %}
+
+{% block content %}
 <h2>Results:</h2>
 {% if results %}
         {% for card in results %}
@@ -15,7 +20,8 @@
                 <input type="hidden" name="types" value="{{ card.types }}"/>
                 <input type="hidden" name="set" value="{{ card.set.name }}"/>
                 <input type="hidden" name="rarity" value="{{ card.rarity }}"/>
-                <input type="hidden" name="image" value="{{ card.images.large }}"/>
+                <input type="hidden" name="image_large" value="{{ card.images.large }}"/>
+                <input type="hidden" name="image_small" value="{{ card.images.small }}"/>
                 <button type="submit">Add to Binder</button>
             </form>
             {% endif %}

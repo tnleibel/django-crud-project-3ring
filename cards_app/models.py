@@ -8,8 +8,10 @@ class Card(models.Model):
     types = models.CharField(max_length=25)
     set = models.CharField(max_length=50)
     rarity = models.CharField(max_length=25)
-    image = models.CharField(max_length=100)
+    image_small = models.CharField(max_length=100)
+    image_large = models.CharField(max_length=100)
     is_owned = models.BooleanField(default=False)
+    is_wanted = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name

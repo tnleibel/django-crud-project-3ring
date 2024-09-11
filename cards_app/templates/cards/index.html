@@ -1,11 +1,37 @@
 {% extends 'base.html' %}
+
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/cards/card-index.css' %}"/>
+{% endblock %}
+
 {% block content %}
-<section class="card-container">
+{% if user.favorite_cards.count != 0  %}
+<h1>Your favorite cards:</h1>
+    <section class="favorites-container">
+        {% for card in user.favorite_cards.all %}
+            <div class="favorite-card">
+                <div class="favorite-card-content">
+                    <a href="{% url 'card-detail' card.id %}">
+                        <img id="favorite-card-img" src="{{ card.image_small }}"/>
+                    </a>
+                    <p>{{ card.name }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </section>
+{% else %}
+    <h2>You have no favorite cards, add some!</h2>
+{% endif %}
+<h1>Your binder:</h1>
+<section class="binder-container">
     {% for card in user.card_binder.all %}
         <div class="card">
             <div class="card-content">
-                <div class="card-image-container">
-                    <img src="{{ card.image }}"/>
+                <div class="card-img">
+                    <a href="{% url 'card-detail' card.id %}">
+                        <img class="card-img" src="{{ card.image_small }}"/>
+                    </a>
                 </div>
                 <h2>{{ card.name }}</h2>
             </div>

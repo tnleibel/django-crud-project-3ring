@@ -20,8 +20,9 @@
         </div>
         <nav>
             <ul>
-              {% if user.is_authenticated %}
+              {% if user %}
               <li><a href="{% url 'home' %}">Home</a></li>
+              <li><a href="{% url 'card-index' %}">Your Binder</a> </li>
               <li>
                 <form id="logout-form" method="post" action="{% url 'logout' %}">
                   {% csrf_token %}

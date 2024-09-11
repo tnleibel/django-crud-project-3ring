@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/cards/card-detail.css' %}"/>
+{% endblock %}
+
+{% block content %}
+<section class="card-container">
+    <div class="card-img">
+        <img src="{{ card.image_large }}"/>
+    </div>
+    <div class="card-favorite">
+        {% if card in favorite_cards %}
+        <form method="post" action="{% url 'remove-favorite' card.id %}">
+            {% csrf_token %}
+            <button type="submit">Remove from Favorites</button>
+        </form>
+        {% else %}
+        <form method="post" action="{% url 'add-favorite' card.id %}">
+            {% csrf_token %}
+            <input type="hidden" name="name" value="{{ card.name }}"/>
+            <input type="hidden" name="supertype" value="{{ card.supertype }}"/>
+            <input type="hidden" name="types" value="{{ card.types }}"/>
+            <input type="hidden" name="set" value="{{ card.set.name }}"/>
+            <input type="hidden" name="rarity" value="{{ card.rarity }}"/>
+            <input type="hidden" name="image_large" value="{{ card.images.large }}"/>
+            <input type="hidden" name="image_small" value="{{ card.images.small }}"/>
+            <button type="submit">Add to Favorites</button>
+        </form>
+        {% endif %}
+        {% if error_message %}
+        <p>{{ error_message }}</p>
+        {% endif %}
+    </div>
+    <div class="card-content">
+        <h1>Name: {{ card.name }}</h1>
+        <h2>Supertype: {{ card.supertype }}</h2>
+        <h2>Types: {{ card.types }}</h2>
+        <h2>Set: {{ card.set }}</h2>
+        <h2>Rarity: {{ card.rarity }}</h2>
+        <h2>Have? {{ card.is_owned }}</h2>
+        <h2>Want? {{ card.is_wanted }}</h2>
+    </div>
+    <div class="card-actions">
+        <a href="{% url 'card-update' card.id %}" class="btn-warn">Edit</a>
+        <a href="{% url 'card-delete' card.id %}" class="btn-danger">Delete</a>
+    </div>
+</section>
+
+{% endblock %}

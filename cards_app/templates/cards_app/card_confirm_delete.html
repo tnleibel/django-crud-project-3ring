@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="page-header">
+    <h1>Delete Card?</h1>
+</div>
+
+<h2>Are you sure you want to delete {{ card.name }}?</h2>
+
+<form action="" method="post" class="form">
+    {% csrf_token %}
+    <a href="{% url 'card-detail' card.id %}" class="btn-secondary">Cancel</a>
+    <button type="submit" class="btn-danger">Delete!</button>
+</form>
+
+{% endblock %}
