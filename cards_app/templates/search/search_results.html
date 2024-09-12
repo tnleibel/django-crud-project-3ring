@@ -2,15 +2,21 @@
 
 {% load static %}
 {% block head %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{% static 'css/search/search-results.css' %}"/>
 {% endblock %}
 
 {% block content %}
 <h2>Results:</h2>
 {% if results %}
+    <div class="search-results">
         {% for card in results %}
         <div class="card">
-            <img src="{{ card.images.small }}"/>
+            <div class="card-img">
+                <img src="{{ card.images.small }}"/>
+            </div>
             <p>{{ card.name }}</p>
             {% if user.is_authenticated %}
             <form method="post" action="{% url 'card-index' %}">
@@ -27,6 +33,7 @@
             {% endif %}
         </div>
         {% endfor %}
+    </div>    
 {% else %}
     <p>No results found</p>
 {% endif %}

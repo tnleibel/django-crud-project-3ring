@@ -1,0 +1,18 @@
+body {
+    font-family: "SUZE", sans-serif;
+    background: linear-gradient(90deg, #00d2ff 0%, #3d4cea 100%);
+}
+
+h1 {
+    text-shadow: white 2px 2px;
+}
+
+button {
+    font-family: "SUZE", sans-serif;
+    border-radius: 6px;
+}
+
+.search-bar {
+    display: flex;
+    align-items: flex-start;
+}

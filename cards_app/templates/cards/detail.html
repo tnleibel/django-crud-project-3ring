@@ -2,6 +2,9 @@
 
 {% load static %}
 {% block head %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{% static 'css/cards/card-detail.css' %}"/>
 {% endblock %}
 
@@ -34,7 +37,7 @@
         {% endif %}
     </div>
     <div class="card-content">
-        <h1>Name: {{ card.name }}</h1>
+        <h2>Name: {{ card.name }}</h2>
         <h2>Supertype: {{ card.supertype }}</h2>
         <h2>Types: {{ card.types }}</h2>
         <h2>Set: {{ card.set }}</h2>

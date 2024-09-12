@@ -1,0 +1,16 @@
+.search-results {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 5px;
+}
+
+.card {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.card-img {
+    width: 245px;
+    height: 342px;
+}
